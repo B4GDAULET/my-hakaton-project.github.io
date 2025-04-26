@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superman | Человек из стали</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --superman-blue: #0067B1;
+            --superman-red: #E23636;
+            --superman-yellow: #FFD700;
+            --section-bg: #0d0d0d;
+            --text-light: #ffffff;
+            --hero-bg: url('https://wallpapercave.com/wp/wp4701978.jpg');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: var(--section-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Навигация */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 1.5rem 5%;
+            align-items: center;
+        }
+
+        .logo {
+            width: 80px;
+            transition: transform 0.3s;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+            text-transform: uppercase;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--superman-red);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Главная секция */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), var(--hero-bg) center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 0 var(--superman-blue);
+            color: var(--superman-red);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            background: var(--superman-red);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Секция способностей */
+        .powers-section {
+            padding: 5rem 5%;
+            background: rgba(0,0,0,0.8);
+        }
+
+        .powers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .power-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .power-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s;
+        }
+
+        .power-card:hover .power-image {
+            transform: scale(1.1);
+        }
+
+        .power-info {
+            padding: 1.5rem;
+            border-top: 4px solid var(--superman-blue);
+        }
+
+        /* Эффекты */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .heat-vision-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            animation: heatVision 1s ease-out;
+        }
+
+        @keyframes heatVision {
+            0% { opacity: 0; background: radial-gradient(circle, rgba(255,60,0,0) 0%, transparent 100%); }
+            50% { opacity: 1; background: radial-gradient(circle, rgba(255,60,0,0.4) 0%, rgba(255,30,0,0.2) 50%, transparent 100%); }
+            100% { opacity: 0; background: radial-gradient(circle, rgba(255,60,0,0) 0%, transparent 100%); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .power-image {
+                height: 200px;
+            }
+        }
+
+
+        .about-section {
+            padding: 5rem 5%;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-content {
+            padding-right: 2rem;
+        }
+
+        .about-image {
+            height: 500px;
+            border-radius: 15px;
+            background: url('https://avatars.mds.yandex.net/i?id=fbcc0b7630e511c3eaddc02e81537e4b3bbf19fa70614066-11917684-images-thumbs&n=13') center/cover;
+            box-shadow: 0 10px 20px rgba(0,103,177,0.3);
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .fact-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-left: 4px solid var(--superman-red);
+        }
+
+        /* Секция галереи */
+        .gallery-section {
+            padding: 5rem 5%;
+            background: rgba(0,0,0,0.9);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+
+            /* Стили для секции врагов */
+    .villains-section {
+        padding: 5rem 5%;
+        background: linear-gradient(45deg, #1a1a1a, #0a0a0a);
+    }
+
+    .villains-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .villain-card {
+        background: #141414;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s;
+        position: relative;
+    }
+
+    .villain-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .villain-image {
+        height: 400px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+
+    .villain-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(transparent 60%, rgba(0,0,0,0.9));
+    }
+
+    .villain-info {
+        padding: 1.5rem;
+        position: absolute;
+        bottom: 0;
+        z-index: 2;
+    }
+
+    .villain-info h3 {
+        color: var(--superman-red);
+        margin-bottom: 0.5rem;
+    }
+
+    .villain-info p {
+        color: #aaa;
+        font-size: 0.9rem;
+    }
+
+    /* Анимация появления */
+    .villain-card {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease-out;
+    }
+
+    .villain-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+        .villain-image {
+            height: 300px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <div class="nav-container">
+        <nav>
+            <img src="https://avatars.mds.yandex.net/i?id=9d233e740af2483401dba42f89d62cdc_l-8249293-images-thumbs&n=13" 
+                 alt="Superman Logo" 
+                 class="logo">
+            <div class="nav-links">
+                <a href="#home">Главная</a>
+                <a href="#powers">Способности</a>
+                <a href="#about">О персонаже</a>
+                <a href="#gallery">Галерея</a>
+                <a href="#villains">Враги Кларка</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Главная секция -->
+    <section class="hero" id="home" style="--hero-bg: url('https://avatars.mds.yandex.net/get-kinopoisk-image/1777765/39a8c336-eb61-44d2-802f-0273160a7f22/1920x')">
+        <div class="hero-content">
+            <h1>СУПЕРМЕН</h1>
+            <p>Последний сын Криптона, защитник Земли</p>
+            <button class="cta-btn" onclick="activateHeatVision()">Активировать Тепловое Зрение</button>
+        </div>
+    </section>
+
+    <!-- Секция способностей -->
+    <section class="powers-section" id="powers">
+        <h2>Сверхспособности</h2>
+        <div class="powers-grid">
+            <!-- Карточка способности -->
+            <div class="power-card">
+                <div class="power-image" 
+                     style="background-image: url('https://avatars.mds.yandex.net/i?id=cccd78a451cd45857d7148e32f3d5208_l-4387671-images-thumbs&n=13')">
+                </div>
+                <div class="power-info">
+                    <h3>Суперсила</h3>
+                    <p>Способен поднимать объекты весом более 100 000 тонн</p>
+                </div>
+            </div>
+
+
+            <div class="power-card">
+                <div class="power-image" 
+                     style="background-image: url('https://avatars.mds.yandex.net/i?id=ae7c1c3514fd2e7dc7ff38ba80daa3c0_l-5345282-images-thumbs&n=13')">
+                </div>
+                <div class="power-info">
+                    <h3>Тепловое зрение</h3>
+                    <p>Излучение тепловых лучей температурой до 5000°C</p>
+                </div>
+            </div>
+
+            <div class="power-card">
+                <div class="power-image" 
+                     style="background-image: url('https://avatars.mds.yandex.net/i?id=13526cc3a08e6fd551cb5f86bd2115cb_l-5384283-images-thumbs&n=13')">
+                </div>
+                <div class="power-info">
+                    <h3>Суперскорость</h3>
+                    <p>Может двигаться быстрее скорости света</p>
+                </div>
+            </div>
+
+            <div class="power-card">
+                <div class="power-image" 
+                     style="background-image: url('https://i.ytimg.com/vi/oTBhJtZTF3Y/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGHIgSSgkMA8=&rs=AOn4CLAP4oeWdrdSqiQMZQdjOVj2OHIa_g')">
+                </div>
+                <div class="power-info">
+                    <h3>Неуязвимость</h3>
+                    <p>Кожа практически непробиваема для любых видов оружия</p>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Секция врагов -->
+<section class="villains-section" id="villains">
+    <h2 class="section-title">Главные противники</h2>
+    <div class="villains-grid">
+        <!-- Карточка врага 1 -->
+        <div class="villain-card">
+            <div class="villain-image" 
+                 style="background-image: url('https://avatars.mds.yandex.net/i?id=ae477c4b7bb82eccd40b4afc7fd0ead2_l-13074590-images-thumbs&n=13')">
+                <div class="villain-overlay"></div>
+            </div>
+            <div class="villain-info">
+                <h3>Лекс Лютор</h3>
+                <p>Гениальный бизнесмен с патологической ненавистью к Супермену</p>
+            </div>
+        </div>
+
+        <!-- Карточка врага 2 -->
+        <div class="villain-card">
+            <div class="villain-image" 
+                 style="background-image: url('https://avatars.mds.yandex.net/i?id=386a4d0b40b78e32fd526f7a5419f924_l-4076159-images-thumbs&n=13')">
+                <div class="villain-overlay"></div>
+            </div>
+            <div class="villain-info">
+                <h3>Дарксайд</h3>
+                <p>Тиран с планеты Апоколипс, стремится к вселенскому господству</p>
+            </div>
+        </div>
+
+        <!-- Карточка врага 3 -->
+        <div class="villain-card">
+            <div class="villain-image" 
+                 style="background-image: url('https://i.pinimg.com/originals/a9/5b/d0/a95bd0b15943ee4a1c4a42da8dc01f8c.jpg')">
+                <div class="villain-overlay"></div>
+            </div>
+            <div class="villain-info">
+                <h3>Генерал Зод</h3>
+                <p>Криптонианский военачальник, противник Супермена</p>
+            </div>
+        </div>
+
+        <!-- Карточка врага 4 -->
+        <div class="villain-card">
+            <div class="villain-image" 
+                 style="background-image: url('https://avatars.mds.yandex.net/i?id=91b89c8a9002278f0a8e6cf440661e58_l-4079679-images-thumbs&n=13')">
+                <div class="villain-overlay"></div>
+            </div>
+            <div class="villain-info">
+                <h3>Брэйниак</h3>
+                <p>Искусственный интеллект, коллекционирующий миры</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <!-- Секция "О персонаже" -->
+        <section class="about-section" id="about">
+            <div class="about-content">
+                <h2>Кларк Кент / Супермен</h2>
+                <p>Последний выживший с планеты Криптон, воспитанный на Земле добрыми фермерами из Канзаса...</p>
+                
+                <div class="facts-grid">
+                    <div class="fact-card">
+                        <h4>Родная планета</h4>
+                        <p>Криптон</p>
+                    </div>
+                    <div class="fact-card">
+                        <h4>Слабость</h4>
+                        <p>Криптонит</p>
+                    </div>
+                    <div class="fact-card">
+                        <h4>Альтер-эго</h4>
+                        <p>Кларк Кент</p>
+                    </div>
+                    <div class="fact-card">
+                        <h4>Союзники</h4>
+                        <p>Лоис Лейн, Бэтмен, Чудо-женщина</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image"></div>
+        </section>
+    
+        <!-- Секция галереи -->
+        <section class="gallery-section" id="gallery">
+            <h2>Галерея</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal">
+                    <img src="https://avatars.mds.yandex.net/i?id=988c8fb07bf5c8bd22b9527971e4fbd9_l-5235887-images-thumbs&n=13" alt="Супермен 1">
+                </div>
+                <div class="gallery-item" onclick="openModal">
+                    <img src="https://i.pinimg.com/originals/80/bf/9d/80bf9d4666d2411d4b45b42abd8d3eae.png" alt="Супермен 2">
+                </div>
+            </div>
+        </section>
+    
+        <!-- Модальное окно -->
+        <div id="modal" class="modal">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modal-img">
+        </div>
+
+    <script>
+        // Активация теплового зрения
+        function activateHeatVision() {
+            const effect = document.createElement('div');
+            effect.className = 'heat-vision-effect';
+            
+            // Добавление луча
+            const beam = document.createElement('div');
+            beam.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(90deg, 
+                    transparent 20%,
+                    rgba(255,60,0,0.8) 50%,
+                    transparent 80%);
+                transform: translateY(-50%);
+                animation: beamMove 0.5s linear;
+            `;
+
+            document.body.appendChild(effect);
+            effect.appendChild(beam);
+
+            setTimeout(() => {
+                effect.remove();
+            }, 1000);
+        }
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Анимация карточек при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.power-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            observer.observe(card);
+        });
+
+        // Изменение фона главной секции
+        function changeHeroBackground(url) {
+            document.querySelector('.hero').style.setProperty('--hero-bg', `url('${url}')`);
+        }
+
+                // Функции для работы с галереей
+                function openModal(src) {
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modal-img');
+            modal.style.display = "block";
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
+
+        // Закрытие модального окна при клике вне изображения
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Анимация при скролле для новых секций
+        const aboutObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelector('.about-content').style.opacity = 1;
+                    entry.target.querySelector('.about-image').style.transform = 'translateX(0)';
+                }
+            });
+        });
+
+        aboutObserver.observe(document.querySelector('.about-section'));
+
+            // Анимация при скролле
+    const villainCards = document.querySelectorAll('.villain-card');
+    
+    const villainObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    villainCards.forEach(card => {
+        villainObserver.observe(card);
+    });
+    </script>
+</body>
+</html>

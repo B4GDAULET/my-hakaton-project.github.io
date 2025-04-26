@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DC Extended Universe | Official Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+         /*Хочу сказать одно,это не ИИ или что то типо того,я просто незнал куда кинуть стили так что они тут */ 
+        :root {
+            --dc-red: #ED1D24;
+            --dc-blue: #0078FF;
+            --dc-dark: #0A0A0A;
+            --dc-light: #F3F3F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Bebas Neue', Arial, sans-serif;
+        }
+
+        body {
+            background: var(--dc-dark);
+            color: var(--dc-light);
+            overflow-x: hidden;
+        }
+
+        /* Навигация */
+        .dc-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10,10,10,0.95);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .dc-logo {
+            width: 80px;
+            filter: drop-shadow(0 0 5px var(--dc-blue));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dc-light);
+            text-decoration: none;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--dc-red);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Герой секция */
+        .dc-hero {
+            height: 100vh;
+            background: linear-gradient(45deg, rgba(10,10,10,0.9), rgba(10,10,10,0.7)),
+                        url('https://assets-prd.ignimgs.com/2023/02/01/dc-2023-2-1675267773187.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            text-shadow: 3px 3px 0 var(--dc-red);
+            line-height: 1;
+            margin-bottom: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--dc-blue);
+        }
+
+        /* Секция фильмов */
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 5%;
+        }
+
+        .movie-card {
+            position: relative;
+            height: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 10px 20px rgba(237,29,36,0.3);
+        }
+
+        .movie-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+        }
+
+        .movie-info {
+            position: absolute;
+            bottom: 0;
+            padding: 2rem;
+            z-index: 2;
+        }
+
+        .movie-title {
+            color: var(--dc-red);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Секция персонажей */
+        .characters-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 4rem 5%;
+            gap: 2rem;
+        }
+
+        .character-card {
+            flex: 0 0 300px;
+            height: 400px;
+            scroll-snap-align: start;
+            border-radius: 15px;
+            background-size: cover;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .character-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Новостная секция */
+        .news-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 5%;
+            background: var(--dc-dark);
+        }
+
+        .news-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--dc-blue);
+        }
+
+        /* Подвал */
+        .dc-footer {
+            background: #000;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--dc-light);
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--dc-red);
+        }
+
+        /* Анимации */
+        @keyframes logoPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .dc-logo:hover {
+            animation: logoPulse 1s infinite;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+
+    /* Секция героев */
+.characters-section {
+    padding: 4rem 5%;
+    background: var(--dc-dark);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--dc-blue);
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+}
+
+.heroes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.hero-card {
+    position: relative;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    text-decoration: none;
+}
+
+.hero-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(237,29,36,0.2);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+.hero-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--dc-blue);
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .heroes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .heroes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-card {
+        height: 300px;
+    }
+}    
+
+/* Герой секция */
+.dc-hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(15deg, 
+        rgba(10, 10, 10, 0.95) 20%, 
+        rgba(237, 29, 36, 0.3) 100%),
+        url('https://i.pinimg.com/originals/47/b3/27/47b327929f5c60825f4dd59069ead329.jpg') center/cover;
+    display: flex;
+    align-items: center;
+    animation: backgroundPan 50s linear infinite;
+}
+
+@keyframes backgroundPan {
+    0% { background-position: 0% center; }
+    100% { background-position: -200% center; }
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, 
+        transparent 60%, 
+        rgba(10,10,10,0.95) 90%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: 6rem;
+    line-height: 1;
+    margin-bottom: 2rem;
+    position: relative;
+    text-shadow: 3px 3px 0 var(--dc-red);
+    -webkit-text-stroke: 2px var(--dc-blue);
+    color: transparent;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 3px 3px 0 var(--dc-red),
+                     0 0 10px rgba(237,29,36,0.5);
+    }
+    to {
+        text-shadow: 3px 3px 10px var(--dc-red),
+                     0 0 30px rgba(237,29,36,0.8);
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.8rem;
+    color: var(--dc-light);
+    margin-bottom: 3rem;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.hero-subtitle::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 4px;
+    background: var(--dc-blue);
+}
+
+.cta-button {
+    position: relative;
+    padding: 1.5rem 3rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.cta-button span {
+    position: relative;
+    z-index: 2;
+    color: var(--dc-light);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.button-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--dc-red);
+    transition: 0.3s;
+}
+
+.cta-button:hover .button-border {
+    border-color: var(--dc-blue);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0,120,255,0.4);
+}
+
+.hero-characters {
+    position: relative;
+    width: 600px;
+    height: 600px;
+}
+
+.character-logo {
+    position: absolute;
+    filter: drop-shadow(0 0 20px rgba(0,120,255,0.4));
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.batman {
+    width: 400px;
+    right: 0;
+    animation: float 4s ease-in-out infinite;
+}
+
+.superman {
+    width: 350px;
+    top: 200px;
+    left: 50px;
+    animation: float 4s ease-in-out infinite 0.5s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .hero-characters {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+        -webkit-text-stroke: 1px var(--dc-blue);
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .cta-button span {
+        font-size: 1rem;
+    }
+}
+
+
+/* Секция фильмов */
+.movies-section {
+    padding: 5rem 5%;
+    background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+}
+
+.movies-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.movie-card {
+    background: #141414;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.movie-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(237,29,36,0.2);
+}
+
+.movie-poster {
+    height: 450px;
+    overflow: hidden;
+    position: relative;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.movie-card:hover .movie-poster img {
+    transform: scale(1.05);
+}
+
+.movie-info {
+    padding: 1.5rem;
+    position: relative;
+    background: linear-gradient(transparent, #0a0a0a 30%);
+}
+
+.movie-info h3 {
+    color: var(--dc-red);
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.movie-info h3 span {
+    color: #666;
+    font-size: 1rem;
+}
+
+.movie-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    color: #888;
+}
+
+.movie-description {
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    height: 60px;
+    overflow: hidden;
+}
+
+.trailer-button {
+    background: var(--dc-blue);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: 0.3s;
+}
+
+.trailer-button:hover {
+    background: var(--dc-red);
+    transform: scale(1.05);
+}
+
+/* Анимации появления */
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.movie-card {
+    animation: cardAppear 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.movie-card:nth-child(1) { animation-delay: 0.2s; }
+.movie-card:nth-child(2) { animation-delay: 0.4s; }
+.movie-card:nth-child(3) { animation-delay: 0.6s; }
+.movie-card:nth-child(4) { animation-delay: 0.8s; }
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .movies-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .movie-poster {
+        height: 350px;
+    }
+    
+    .movie-info h3 {
+        font-size: 1.3rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="dc-nav">
+        <img src="https://i.ytimg.com/vi/hnCvYHdOi6I/maxresdefault.jpg" 
+             alt="DC Logo" 
+             class="dc-logo">
+        <div class="nav-links">
+            <a href="#movies">Фильмы</a>
+            <a href="#characters">Персонажи</a>
+        </div>
+    </nav>
+
+<!-- Герой секция -->
+<section class="dc-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title" data-text="DC UNIVERSE">DC UNIVERSE</h1>
+            <p class="hero-subtitle">Открой мир легендарных героев и эпических сражений</p>
+            <button class="cta-button">
+                <span>Исследовать вселенную</span>
+                <div class="button-border"></div>
+            </button>
+        </div>
+        <div class="hero-characters">
+            <img src="https://steamuserimages-a.akamaihd.net/ugc/60330667566988646/12835131E114881A4C37AD8F9E69EF0260F3551F/?imw=512&amp;imh=512&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true" 
+                 alt="Batman" 
+                 class="character-logo batman">
+            <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/streams/2013/June/130613/6C7868971-tdy-130612-man-of-steel1.jpg" 
+                 alt="Superman" 
+                 class="character-logo superman">
+        </div>
+    </div>
+</section>
+<!-- Секция фильмов -->
+<section class="movies-section" id="movies">
+    <h2 class="section-title">Фильмы DC Universe</h2>
+    <div class="movies-container">
+        <!-- Бэтмен -->
+        <div class="movie-card batman-card">
+            <div class="movie-poster">
+                <img src="https://m.media-amazon.com/images/M/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1_FMjpg_UX1000_.jpg" 
+                     alt="The Dark Knight Rises">
+            </div>
+            <div class="movie-info">
+                <h3>Темный рыцарь: Возрождение <span>(2012)</span></h3>
+                <div class="movie-meta">
+                    <p><i class="fas fa-star"></i> 8.4/10 IMDb</p>
+                    <p>Кристиан Бэйл</p>
+                </div>
+                <p class="movie-description">
+                    Финал трилогии Нолана. Бэтмен сталкивается с террористом Бэйном, 
+                    угрожающим уничтожить Готэм.
+                </p>
+            </div>
+        </div>
+
+        <!-- Супермен -->
+        <div class="movie-card superman-card">
+            <div class="movie-poster">
+                <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1898899/caada63c-2e81-414d-ac05-ab4da12939e0/1920x" 
+                     alt="Man of Steel">
+            </div>
+            <div class="movie-info">
+                <h3>Человек из стали <span>(2013)</span></h3>
+                <div class="movie-meta">
+                    <p><i class="fas fa-star"></i> 7.0/10 IMDb</p>
+                    <p>Генри Кавилл</p>
+                </div>
+                <p class="movie-description">
+                    Происхождение Супермена и его борьба с генералом Зодом, 
+                    угрожающим Земле.
+                </p>
+                <button class="trailer-button">
+            </div>
+        </div>
+
+        <!-- Флэш -->
+        <div class="movie-card flash-card">
+            <div class="movie-poster">
+                <img src="https://avatars.mds.yandex.net/i?id=45c4c191a45f33d5feb8a1bae971cbf7_l-13074590-images-thumbs&n=13" 
+                     alt="The Flash">
+            </div>
+            <div class="movie-info">
+                <h3>Флэш <span>(2023)</span></h3>
+                <div class="movie-meta">
+                    <p><i class="fas fa-star"></i> 6.7/10 IMDb</p>
+                    <p>Эзра Миллер</p>
+                </div>
+                <p class="movie-description">
+                    Путешествие во времени и мультивселенная. Флэш пытается 
+                    изменить прошлое, нарушая хронологию.
+                </p>
+            </div>
+        </div>
+
+        <!-- Аквамен -->
+        <div class="movie-card aquaman-card">
+            <div class="movie-poster">
+                <img src="https://m.media-amazon.com/images/M/MV5BOTk5ODg0OTU5M15BMl5BanBnXkFtZTgwMDQ3MDY3NjM@._V1_FMjpg_UX1000_.jpg" 
+                     alt="Aquaman">
+            </div>
+            <div class="movie-info">
+                <h3>Аквамен <span>(2018)</span></h3>
+                <div class="movie-meta">
+                    <p><i class="fas fa-star"></i> 6.8/10 IMDb</p>
+                    <p>Джейсон Момоа</p>
+                </div>
+                <p class="movie-description">
+                    Артур Карри должен объединить подводные королевства, 
+                    чтобы защитить океан и поверхностный мир.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Секция персонажей -->
+<section class="characters-section" id="characters">
+    <h2 class="section-title">Главные Герои</h2>
+    <div class="heroes-grid">
+        <a href="batman.html" class="hero-card" 
+           style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                   url('https://avatars.mds.yandex.net/i?id=fc91840bbbd77da89ca425d92cf9033f_l-8310601-images-thumbs&n=13')">
+            <div class="hero-content">
+                <h3>Бэтмен</h3>
+                
+            </div>
+        </a>
+        <a href="superman.html" class="hero-card" 
+        style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                url('https://images.hdqwalls.com/download/superman-henry-rz-1440x2960.jpg')">
+         <div class="hero-content">
+             <h3>Супермэн</h3>
+             
+         </div>
+     </a>
+
+    </div>
+</section>
+
+    <!-- Подвал -->
+    <footer class="dc-footer">
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>футер для красоты</p>
+    </footer>
+
+    <script>
+        // Анимация для карусели
+        const carousel = document.querySelector('.characters-carousel');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        carousel.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        carousel.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2;
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+
+        // Параллакс эффект для героя
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelector('.dc-hero').style.backgroundPositionY = scrolled * 0.5 + 'px';
+        });
+
+        // Параллакс эффекты
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.dc-hero');
+    hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+    
+    const characters = document.querySelectorAll('.character-logo');
+    characters.forEach(char => {
+        char.style.transform = `translateY(${scrolled * 0.3}px)`;
+    });
+});
+
+// Анимация карточек фильмов
+const movieCards = document.querySelectorAll('.movie-card');
+
+const movieObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+        }
+    });
+}, { threshold: 0.1 });
+
+movieCards.forEach(card => {
+    movieObserver.observe(card);
+});
+    </script>
+</body>
+</html>

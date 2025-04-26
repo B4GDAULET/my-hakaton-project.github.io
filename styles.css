@@ -1,0 +1,720 @@
+html {
+    scroll-behavior: smooth;
+}
+
+
+:root {
+    --primary: #1a1a1a;
+    --accent: #FFD700;
+    --text: #ffffff;
+    --batman-yellow: #FFD700;
+    --batman-black: #000000;
+    --section-bg: #0d0d0d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Bahnschrift', Arial, sans-serif;
+}
+
+body {
+    background: var(--primary);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* Навигация */
+.nav-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    transition: background 0.5s ease-in-out;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 5%;
+    align-items: center;
+}
+
+.logo {
+    width: 60px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+/* Анимация при наведении на логотип */
+.logo-container {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Эффект при наведении: увеличение логотипа */
+.logo-container:hover {
+    transform: scale(1.1);
+}
+
+
+.logo-shape {
+    transition: fill 0.3s ease;
+}
+
+/* стили для навигации */
+.nav-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    transition: background 0.5s ease-in-out;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 5%;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text, #fff);
+    text-decoration: none;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #FFD700;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Главная секция */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                url('https://images.unsplash.com/photo-1531259683007-016a7b628fc3') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 80px;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 0 var(--batman-black);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta-btn {
+    padding: 1rem 2rem;
+    background: var(--batman-yellow);
+    color: var(--batman-black);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+}
+
+/* Секции */
+.section {
+    padding: 5rem 5%;
+    background: var(--section-bg);
+}
+
+.section:nth-child(even) {
+    background: var(--primary);
+}
+
+.gadgets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* стили для карточек арсенала */
+.gadget-card {
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 10px;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Эффект при наведении карточки */
+.gadget-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(255,215,0,0.3);
+}
+
+/* Стилизейшн подсказки */
+.gadget-card .tooltip {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--batman-yellow);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    pointer-events: none;
+    font-size: 0.9rem;
+}
+
+/* Плавное появление подсказки */
+.gadget-card:hover .tooltip {
+    opacity: 1;
+}
+
+
+@keyframes gadgetGlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Основные стили для злодеев */
+.villains-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* Общий стилизейшн карточек с плавными переходами */
+.villain-card {
+    position: relative;
+    background: #1f1f1f;
+    padding: 2rem;
+    border-left: 4px solid var(--batman-yellow);
+    border-radius: 10px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                background 0.3s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+    will-change: transform, opacity;
+    overflow: hidden;
+}
+
+/* Стайлс для секции злодеев */
+#villains {
+    background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+    position: relative;
+    overflow: hidden;
+}
+
+.villains-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.villain-card {
+    position: relative;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    background-blend-mode: multiply;
+    isolation: isolate;
+}
+
+.villain-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, 
+        rgba(0,0,0,0) 0%, 
+        rgba(0,0,0,0.8) 80%);
+    z-index: 1;
+    transition: opacity 0.3s;
+}
+
+.villain-card::after {
+    content: "";
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--accent-color);
+    transition: bottom 0.3s;
+}
+
+.villain-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.villain-card:hover::after {
+    bottom: 0;
+}
+
+/* юник стайлз для каждого злодея */
+.villain-card.joker {
+    --accent-color: #7CFC00;
+    background-image: 
+        linear-gradient(45deg, rgba(156, 39, 176, 0.1), rgba(255, 34, 98, 0.1)),
+        url('https://i.pinimg.com/736x/15/72/c1/1572c166226b0f4f97b777cb2e8353e9.jpg');
+}
+
+.villain-card.penguin {
+    --accent-color: #00B4D8;
+    background-image: 
+        linear-gradient(45deg, rgba(13, 71, 161, 0.1), rgba(33, 150, 243, 0.1)),
+        url('https://avatars.mds.yandex.net/i?id=716b22fd6bfc358766a0cb05a6c33c29_l-5232475-images-thumbs&n=13');
+}
+
+.villain-card.catwoman {
+    --accent-color: #FFD700;
+    background-image: 
+        linear-gradient(45deg, rgba(76, 175, 80, 0.1), rgba(129, 199, 132, 0.1)),
+        url('https://avatars.mds.yandex.net/i?id=bbdcd9932ec4c32944e05caa7d00b4547da87560-3765781-images-thumbs&n=13');
+}
+
+.villain-card.scarecrow {
+    --accent-color: #FF6B6B;
+    background-image: 
+        linear-gradient(45deg, rgba(121, 85, 72, 0.1), rgba(141, 110, 99, 0.1)),
+        url('https://i.pinimg.com/originals/73/3f/c6/733fc657c63769ffa8e73069dca17e65.jpg');
+}
+
+/* Текст элементс */
+.villain-card h3 {
+    color: var(--accent-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 0.4s 0.1s;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+}
+
+.villain-card p {
+    color: rgba(255,255,255,0.9);
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 0.4s 0.2s;
+    z-index: 2;
+    position: relative;
+    line-height: 1.6;
+    max-width: 90%;
+}
+
+/* Анимэйшенс при ховере */
+.villain-card:hover h3,
+.villain-card:hover p {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Эффект параллакса */
+.villain-card:hover {
+    background-position: center 30%;
+}
+
+/* Индикатор выбора */
+.villain-card::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, 
+        var(--accent-color) 0%, 
+        transparent 70%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.5s;
+    z-index: 1;
+}
+
+.villain-card:hover::before {
+    width: 150%;
+    height: 150%;
+    opacity: 0.1;
+}
+
+/* Анимация появления */
+@keyframes villainAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8) rotate(-5deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+.villain-card {
+    animation: villainAppear 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.villain-card:nth-child(1) { animation-delay: 0.2s; }
+.villain-card:nth-child(2) { animation-delay: 0.4s; }
+.villain-card:nth-child(3) { animation-delay: 0.6s; }
+.villain-card:nth-child(4) { animation-delay: 0.8s; }
+
+/* когда они попадают в зону видимости */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.villain-card.animate {
+    animation: fadeInUp 0.6s forwards;
+}
+
+/* Ключевая анимация появления */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*плавное появление */
+.villain-card.animate {
+    animation: fadeInUp 0.6s forwards;
+}
+
+/* Подвал */
+footer {
+    background: #000;
+    padding: 3rem 5%;
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.social-links a {
+    color: var(--text);
+    font-size: 1.5rem;
+    transition: color 0.3s ease-out;
+}
+
+.social-links a:hover {
+    color: var(--batman-yellow);
+}
+
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  /* Стили карточки гаджета */
+  .card {
+    width: 300px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    padding: 15px;
+    color: #fff;
+  }
+  
+  .card h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+  
+  .card p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  /* Эффект при наведении на карточку */
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  }
+  .arsenal-title {
+    text-align: center;
+    font-size: 3rem; /* Увеличенный размер заголовка */
+    margin: 0 auto 2rem auto;
+    color: var(--batman-yellow); /* Можно задать фирменный желтый или другой цвет */
+    letter-spacing: 1px;
+  }
+
+  #arsenal {
+    padding: 3rem 5%;
+    background: var(--section-bg);
+  }
+  
+
+
+  #about {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(45deg, 
+        rgba(0, 0, 0, 0.9) 0%, 
+        rgba(20, 20, 20, 0.9) 100%),
+        url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+    transform-style: preserve-3d;
+}
+
+#about::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: url('https://www.freepnglogos.com/uploads/batman-logo-png/batman-logo-batman-symbol-meaning-history-and-evolution-13.png') 
+                center/contain repeat;
+    opacity: 0.03;
+    animation: bgMove 30s linear infinite;
+}
+
+@keyframes bgMove {
+    0% { transform: rotate(0deg) translate(0, 0); }
+    100% { transform: rotate(360deg) translate(100px, 100px); }
+}
+
+#about h2 {
+    font-size: 2.5rem;
+    color: var(--batman-yellow);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    transform: translateY(50px);
+    opacity: 0;
+    animation: slideUp 1s forwards;
+    animation-delay: 0.3s;
+}
+
+#about h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--batman-yellow);
+    box-shadow: 0 0 10px var(--batman-yellow);
+}
+
+#about p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+    color: rgba(255,255,255,0.9);
+    position: relative;
+    transform: translateY(50px);
+    opacity: 0;
+    animation: slideUp 1s forwards;
+    animation-delay: 0.6s;
+    background: rgba(0,0,0,0.7);
+    padding: 2rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--batman-yellow);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+#about p::first-letter {
+    font-size: 2.5em;
+    color: var(--batman-yellow);
+    float: left;
+    line-height: 0.7;
+    margin-right: 8px;
+    text-shadow: 2px 2px 0 var(--batman-black);
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Эффект при наведении */
+#about:hover::before {
+    opacity: 0.05;
+    animation-duration: 15s;
+}
+
+
+#hobbies {
+    background: linear-gradient(45deg, 
+        rgba(10, 10, 10, 0.95), 
+        rgba(20, 20, 20, 0.95)),
+        url('https://www.transparenttextures.com/patterns/diagonal-striped-brick.png');
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.stat-card {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255,215,0,0.1);
+}
+
+.stat-card i {
+    font-size: 2.5rem;
+    color: var(--batman-yellow);
+    min-width: 60px;
+    text-align: center;
+}
+
+.stat-content h3 {
+    color: var(--batman-yellow);
+    margin-bottom: 0.5rem;
+}
+
+.counter {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 10px rgba(0,255,0,0.3);
+}
+
+.highlight {
+    font-size: 2rem;
+    color: var(--batman-yellow);
+    font-weight: bold;
+}
+
+.hobby-list {
+    grid-column: 1 / -1;
+    background: rgba(0,0,0,0.5);
+    padding: 2rem;
+    border-radius: 15px;
+    border-left: 4px solid var(--batman-yellow);
+}
+
+.hobby-list ul {
+    columns: 2;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.hobby-list li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    list-style: none;
+}
+
+.hobby-list li::before {
+    content: '🦇';
+    position: absolute;
+    left: 0;
+    color: var(--batman-yellow);
+}
+
+/* Анимация счетчика */
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.counter {
+    animation: countUp 1.5s ease-out forwards;
+}
